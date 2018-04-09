@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # set the data_dir variable
 data_dir=/data
