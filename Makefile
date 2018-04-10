@@ -23,4 +23,10 @@ start:
 sh:
 	docker exec -ti minecraft /bin/sh
 
+attach:
+	docker exec -ti minecraft screen -r
+
 run: start
+
+service:
+	docker service create --name minecraft --env RAM=4G --mode global --mount=type=volume,source=data-minecraft,destination=/data --restart-condition on-failure -p 25565 belooussov/minecraft:1.12.2

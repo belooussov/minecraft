@@ -30,3 +30,11 @@ docker run -d -m 8G -e RAM=8G \
   --mount=type=volume,source=data-minecraft,destination=/data \
   -p 25565:25565 belooussov/minecraft:1.12.2
 ```
+
+To attach to minecraft's console, run this:
+
+```
+docker exec -ti minecraft screen -r
+```
+
+Issue your server commands, and disconnect by pressing first "Ctrl+a", then "d".
