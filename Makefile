@@ -34,3 +34,6 @@ service:
 
 pull:
 	docker pull belooussov/minecraft:$(MINECRAFT_VERSION)
+
+push:
+	docker push belooussov/minecraft:$(MINECRAFT_VERSION)
