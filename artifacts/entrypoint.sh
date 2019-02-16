@@ -13,4 +13,5 @@ fi
 ln -sf /root/minecraft_server.jar $data_dir/minecraft_server.jar
 
 # launch minecraft
-cd $data_dir/ && screen -S minecraft -d -m java -Xmx$RAM -jar minecraft_server.jar nogui && tail -F /data/logs/latest.log
+/usr/bin/java -Xmx2G -jar $data_dir/minecraft_server.jar nogui
+#&& tail -F /data/logs/latest.log

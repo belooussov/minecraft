@@ -19,7 +19,8 @@ data:
 	docker volume create data-minecraft
 
 start:
-	docker run -d --name=minecraft -h minecraft -m $(MAXIMUM_MEMORY) -e RAM=$(MAXIMUM_MEMORY) --mount=type=volume,source=data-minecraft,destination=/data -p $(MINECRAFTPORT):$(MINECRAFTPORT) $(AUTHOR)/$(NAME):$(MINECRAFT_VERSION)
+	docker run -d -m 2G -e RAM=2G --mount=type=volume,source=data-minecraft,destination=/data -p $(MINECRAFTPORT):$(MINECRAFTPORT) $(AUTHOR)/$(NAME):$(MINECRAFT_VERSION)
+	#docker run -d --name=minecraft -h minecraft -m $(MAXIMUM_MEMORY) -e RAM=$(MAXIMUM_MEMORY) --mount=type=volume,source=data-minecraft,destination=/data -p $(MINECRAFTPORT):$(MINECRAFTPORT) $(AUTHOR)/$(NAME):$(MINECRAFT_VERSION)
 
 sh:
 	docker exec -ti minecraft /bin/sh
