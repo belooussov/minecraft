@@ -14,4 +14,3 @@ ln -sf /root/minecraft_server.jar $data_dir/minecraft_server.jar
 
 # launch minecraft
 /usr/bin/java -Xmx2G -jar $data_dir/minecraft_server.jar nogui
-#&& tail -F /data/logs/latest.log
