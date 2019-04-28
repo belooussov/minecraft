@@ -13,4 +13,4 @@ fi
 ln -sf /root/minecraft_server.jar $data_dir/minecraft_server.jar
 
 # launch minecraft
-/usr/bin/java -Xmx2G -jar $data_dir/minecraft_server.jar nogui
+/usr/bin/java -Xmx8G -jar $data_dir/minecraft_server.jar nogui
