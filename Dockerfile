@@ -1,17 +1,15 @@
 FROM alpine:latest
 
-ARG MINECRAFT_VERSION=1.12.2
+ARG MINECRAFT_VERSION=1.14.1
 ENV MINECRAFT_VERSION=$MINECRAFT_VERSION
 RUN apk update
 RUN apk add openjdk8 curl screen
-RUN curl "https://s3.amazonaws.com/Minecraft.Download/versions/$MINECRAFT_VERSION/minecraft_server.$MINECRAFT_VERSION.jar" -o /root/minecraft_server.jar
-ARG RAM=2G
+RUN curl "https://launcher.mojang.com/v1/objects/ed76d597a44c5266be2a7fcd77a8270f1f0bc118/server.jar" -o /root/minecraft_server.jar
+ARG RAM=8G
 ENV RAM=$RAM
 COPY artifacts/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 EXPOSE 25565
-# TODO: mkdir line is useless
-RUN mkdir /data
+WORKDIR /data
 VOLUME ["/data"]
-# TODO: run as user 'minecraft'
 ENTRYPOINT ["/entrypoint.sh"]
