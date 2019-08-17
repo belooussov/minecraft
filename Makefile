@@ -1,6 +1,6 @@
 AUTHOR=belooussov
 NAME=minecraft
-MINECRAFT_VERSION=1.14.3
+MINECRAFT_VERSION=1.10.2
 MINECRAFTPORT=25565
 MAXIMUM_MEMORY=8G
 
@@ -37,3 +37,7 @@ pull:
 
 push:
 	docker push belooussov/minecraft:$(MINECRAFT_VERSION)
+
+world:
+	docker service create --name minecraftworld --hostname minecraftworld --env RAM=$(MAXIMUM_MEMORY) --mode global --mount=type=volume,source=world,destination=/data --restart-condition on-failure -p 25565:25565 belooussov/minecraft:1.10.2
+
