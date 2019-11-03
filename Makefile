@@ -30,10 +30,22 @@ attach:
 run: start
 
 service:
-	docker service create --name minecraft --hostname minecraft --limit-memory 8589934592 --env RAM=$(MAXIMUM_MEMORY) --mode global --mount=type=volume,source=data-minecraft,destination=/data --restart-condition on-failure -p 25565:25565 belooussov/minecraft:$(MINECRAFT_VERSION)
+	docker service create \
+	--name minecraft \
+	--hostname minecraft \
+	--limit-memory 8589934592 \
+	--env RAM=$(MAXIMUM_MEMORY) \
+	--mode global \
+	--mount=type=volume,source=data-minecraft,destination=/data \
+	--restart-condition on-failure \
+	-p 25565:25565 \
+	belooussov/minecraft:$(MINECRAFT_VERSION)
 
 pull:
 	docker pull belooussov/minecraft:$(MINECRAFT_VERSION)
 
 push:
 	docker push belooussov/minecraft:$(MINECRAFT_VERSION)
+
+backup:
+	tar czvf ~/backup.minecraft.data.volume.tgz /var/lib/docker/volumes/data-minecraft
