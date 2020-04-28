@@ -49,3 +49,6 @@ push:
 
 backup:
 	tar czvf ~/backup.minecraft.data.volume.tgz /var/lib/docker/volumes/data-minecraft
+
+setup:
+	ansible-playbook -i hosts.ini setup.yml -K

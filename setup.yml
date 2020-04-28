@@ -1,0 +1,62 @@
+---
+
+- name: Setup minecraft server on a ubuntu box
+  hosts: minecraft
+  gather_facts: true
+  become: true
+  vars:
+    - minecraft_version: '1.15.2'
+    - minecraft_image: "belooussov/minecraft:{{ minecraft_version }}"
+  tasks:
+    - name: Install Ubuntu packages
+      apt:
+        update_cache: true
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - docker.io
+          - gnupg-agent
+          - python3-pip
+          - software-properties-common
+
+    - name: Ensure pip modules
+      pip:
+        name: ['docker', 'docker-compose']
+
+    - name: Pull the legendary minecraft server docker image
+      docker_image:
+        name: "{{ minecraft_image }}"
+        pull: true
+        source: pull
+        tls: true
+
+    - name: Make sure the data volume subdir is present
+      file:
+        path: "/root/data"
+        group: docker
+        state: directory
+
+    - name: Configure the minecraft docker service
+      docker_service:
+        project_name: "minecraft"
+        recreate: always
+        debug: true
+        definition:
+          version: '3.6'
+          networks:
+            network:
+          services:
+            minecraft:
+              container_name: "minecraft"
+              image: "{{ minecraft_image }}"
+              # hostname: "minecraft"
+              restart: unless-stopped
+              networks:
+                - network
+              security_opt:
+                - label:disable
+              volumes:
+                - "/root/data:/data"
+              ports:
+                - "25565:25565"  # make this configurable?
