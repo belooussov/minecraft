@@ -1,10 +1,9 @@
 FROM alpine:latest
 
-ARG MINECRAFT_VERSION=1.15.2
+ARG MINECRAFT_VERSION=1.16.4
 ENV MINECRAFT_VERSION=$MINECRAFT_VERSION
-RUN apk update
-RUN apk add openjdk8 curl screen
-RUN curl -o /root/minecraft_server.jar https://launcher.mojang.com/v1/objects/bb2b6b1aefcd70dfd1892149ac3a215f6c636b07/server.jar
+RUN apk --no-cache add openjdk8 curl screen
+RUN curl -o /root/minecraft_server.jar https://launcher.mojang.com/v1/objects/35139deedbd5182953cf1caa23835da59ca3d7cd/server.jar
 ARG RAM=8G
 ENV RAM=$RAM
 COPY artifacts/entrypoint.sh /entrypoint.sh
